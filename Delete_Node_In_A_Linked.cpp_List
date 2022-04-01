@@ -1,0 +1,8 @@
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        // Đẩy node lên node kế tiếp
+        node->val=node->next->val; 
+        node->next=node->next->next;
+    }
+};
