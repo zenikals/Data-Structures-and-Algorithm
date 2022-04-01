@@ -1,0 +1,46 @@
+ /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        // Hiểu đơn giản là đổi các val của node (1,2), (3,4), ....
+        // -> Mình chỉ cần đổi val của node 1,2 và 3,4,....
+        // Và thứ tự duyệt vẫn như cũ nên nó giống đổi Node :))
+        ListNode* res = head;
+        while( head!=NULL && head->next != NULL){
+            int tmp = head->next->val;
+            head->next->val = head->val;
+            head->val = tmp;
+            head = head->next->next;
+        }
+
+        return res;
+    }
+};
+// Một cách dùng đệ quy để đổi Node thay vì đổi giá trị
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* now = head;
+        if( now == NULL || now->next == NULL){
+            return head;
+        }
+        
+        ListNode* tmp = head->next; 
+        // head->next = head (sau khi swap head->next->next và head->next->next->next)
+        // VD : sau khi swap (1,2) -> (2,1) | (3,4) -> (4,3)
+        // 1->next = head( of Linked List (3,4,...) after swap (3,4) -> (4,3)) -> 4
+        head->next = swapPairs(head->next->next); 
+        // 2->next = 1
+        tmp->next = head; 
+        return tmp;
+    }
+};
