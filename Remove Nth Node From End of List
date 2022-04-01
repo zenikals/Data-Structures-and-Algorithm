@@ -1,0 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* now = head;
+        int siz = 1;
+        // Tìm ra kích cỡ của Linked List
+        while( now->next != NULL ){
+            now = now->next;
+            siz++;
+        }
+        ListNode* solve = head;
+        // Nếu siz = n -> Xoá node đầu tiên
+        if( siz == n ){
+            return head->next;
+        }else{
+            // Chạy đến node siz-n -> node thứ n+1 từ phải sang
+            for(int i = 1; i < siz-n; i++){
+                solve = solve->next;
+            }
+            // Cho node tiếp theo của node siz-n là node siz-n+2 
+            // -> Xoá node siz-n+1 (là node thứ n từ phải sang)
+            solve->next = solve->next->next;
+            return head;
+
+        }
+    }
+};
