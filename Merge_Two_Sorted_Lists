@@ -1,0 +1,53 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if(list1 == NULL){
+            return list2;
+        }else if( list2 == NULL){
+            return list1;
+        }
+        ListNode* head = NULL;
+
+        ListNode* now = head;
+        while( list1 != NULL && list2 != NULL){
+            // Xây dựng dần bằng cách kiểm tra list1->val và list2->val
+            // Nếu đã có phần tử khởi đầu -> Cho node nhỏ hơn vào now->next
+            // Nếu chưa khởi tạo cho node head và now
+            if( list1->val < list2->val ){
+                if( now != NULL ){
+                    now->next = list1;
+                    now = now->next;
+                }else{
+                    head = now = list1;
+                }
+                list1 = list1->next;
+            }else{
+                if( now != NULL ){
+                    now->next = list2;
+                    now = now->next;
+                }else{
+                    head = now = list2;
+                }
+                list2 = list2->next;
+            }
+        }
+        // Sau khi đã duyệt hết 1 trong 2 dãy thì phần còn lại sẽ tăng dần
+        if(list1 != NULL){
+            now->next = list1;
+        }
+        if( list2 != NULL){
+            now->next = list2;
+        }
+        return head;
+    }
+};
