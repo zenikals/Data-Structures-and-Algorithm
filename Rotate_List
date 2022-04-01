@@ -1,0 +1,46 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if( head == NULL ){
+            return head;
+        }
+        ListNode* tail = head;
+        int siz = 1;
+        // Tìm kích cỡ của Linked List
+        while( tail->next != NULL){
+            tail = tail->next;
+            siz++;
+        }
+        // Cho node kế của node cuối là node đầu 
+        // -> Một vòng tròn
+        tail->next = head;
+        
+        // Rotate tuần hoàn theo chu kì siz
+        k%=siz;
+        
+        // Rotate k lần -> phần tử thứ siz-k là phần tử cuối của Linked List
+        int cnt = 0;
+        ListNode* now = head;
+        // Duyệt để lấy phần tử cuối của Linked List (ptu thứ siz-k)
+        for(int i = 1; i < siz-k; i++){
+            now = now->next;
+        }
+        
+        // Head của Linked List bây giờ sẽ là now->next (do là vòng tròn)
+        ListNode* res = now->next;
+        
+        // Do là phần tử cuối nên now->next = NULL
+        now->next = NULL;
+        return res;
+    }
+};
