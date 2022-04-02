@@ -1,0 +1,26 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
+//https://dev.to/seanpgallivan/solution-intersection-of-two-linked-lists-478e
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        //nối chúng theo thứ tự ngược lại, A + B và B + A.
+        ListNode *a = headA, *b = headB;
+        //kiểm tra xem tại một thời điểm nào đó hai danh sách đã hợp nhất đang trỏ đến cùng một nút hay không
+        while (a != b) {
+            //khi hai danh sách được hợp nhất không giao nhau, 
+            //giá trị của a và b sẽ giống nhau (null) khi chúng ta đến cuối danh sách đã hợp nhất
+            a = !a ? headB : a->next;
+            b = !b ? headA : b->next;
+        }
+        return a;
+    }
+};
