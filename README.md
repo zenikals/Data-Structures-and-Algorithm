@@ -1,6 +1,6 @@
 # Data-Structures-and-Algorithm
-Nhóm 6 
-Giảng viên : Vũ Đức Minh
+#### Nhóm 6 
+#### Giảng viên : Vũ Đức Minh
 ## Bài tập 3 
 ### Bài tập Leetcode
 - Bài 1 : [Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) [(**Solution**)](https://github.com/luat2003/Data-Structures-and-Algorithm/blob/main/Delete_Node_In_A_Linked_List)
